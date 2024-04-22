@@ -2,6 +2,7 @@ const { ObjectId } = require('mongodb');
 
 exports.addUser = async function(req,res){
     try{
+        //Read Database and collection which need to perform
         const collection = global.dbClient.db('mongodb_session').collection('users');
         const result = await collection.insertOne({ name: req.body.name, age: req.body.age, email: req.body.email });
 
@@ -20,6 +21,7 @@ exports.addUser = async function(req,res){
 
 exports.updateUser = async function(req,res){
     try{
+        //Read Database and collection which need to perform
         const collection = global.dbClient.db('mongodb_session').collection('users');
         
         // Update one document
@@ -47,6 +49,7 @@ exports.updateUser = async function(req,res){
 
 exports.userList = async function(req,res){
     try{
+        //Read Database and collection which need to perform
         const collection = global.dbClient.db('mongodb_session').collection('users');
         
         // get document by id
@@ -69,6 +72,7 @@ exports.userList = async function(req,res){
 
 exports.userProjects = async function(req,res){
     try{
+        //Read Database and collection which need to perform
         const collection = global.dbClient.db('mongodb_session').collection('users');
         
 
@@ -103,9 +107,11 @@ exports.userProjects = async function(req,res){
 
 
 exports.userTransaction = async function(req,res){
+    //Initialize mongo session and start
     const session = global.dbClient.startSession();
     session.startTransaction();
     try{
+        //Read Database and collection which need to perform
         const collection = global.dbClient.db('mongodb_session').collection('users');
 
         const create = await collection.insertOne({ name: 'Piter', age: 30, email: 'piter@gmail.com',created_at:new Date(),update_at:new Date() },{ session });
